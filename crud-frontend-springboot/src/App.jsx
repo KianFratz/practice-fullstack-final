@@ -1,6 +1,7 @@
 import React from "react";
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
+import { AddUser } from "./user/AddUser";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -8,8 +9,9 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route index element={<Home />} />
+          <Route exact path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/add-user" element={<AddUser />} />
         </Routes>
       </BrowserRouter>
     </>
