@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { NavBar } from "../layout/NavBar";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const AddUser = () => {
+  let navigate = useNavigate()
+
   const [user, setUser] = useState({
     name: "",
     username: "",
@@ -15,6 +19,13 @@ export const AddUser = () => {
     
   }
 
+  const onCreateUser = async (e) => {
+    e.preventDefault();
+    await axios.post("http://localhost:8080/user", user)
+    navigate("/") // navigate to home
+
+  }
+
   return (
     <div>
       <NavBar />
@@ -24,6 +35,7 @@ export const AddUser = () => {
         </h2>
 
         <form
+          onSubmit={(e) => onCreateUser(e)}
           action=""
           className="container p-4 border border-gray-300 mx-auto max-w-md bg-white rounded"
         >
@@ -82,9 +94,9 @@ export const AddUser = () => {
             <button className="border px-3 py-1 rounded bg-blue-500 text-white mr-1">
               Submit
             </button>
-            <button className="border px-3 py-1 rounded hover:bg-red-500 hover:text-white">
+            <Link to={"/"} className="border px-3 py-1 rounded hover:bg-red-500 hover:text-white">
               Cancel
-            </button>
+            </Link>
           </div>
         </form>
       </div>
