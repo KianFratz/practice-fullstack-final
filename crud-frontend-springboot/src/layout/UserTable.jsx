@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link, useParams } from "react-router-dom";
 
 export const UserTable = () => {
   const [users, setUsers] = useState([]);
+
+  const { id } = useParams();
 
   useEffect(() => {
     getUsers();
@@ -12,6 +15,12 @@ export const UserTable = () => {
     const userData = await axios.get("http://localhost:8080/users");
     console.log(userData.data);
     setUsers(userData.data);
+  };
+
+  // delete user
+  const deleteUser = async (id) => {
+    await axios.delete(`http://localhost:8080/user/${id}`);
+    getUsers()
   };
 
   return (
@@ -38,10 +47,16 @@ export const UserTable = () => {
                   <button className="text-white border bg-blue-500 px-4 py-1 rounded-md mr-2">
                     View
                   </button>
-                  <button className="border-blue-500 border text-blue-500 bg-white px-4 py-1 rounded-md mr-2">
+                  <Link
+                    to={`/edituser/${user.id}`}
+                    className="border-blue-500 border text-blue-500 bg-white px-4 py-1 rounded-md mr-2"
+                  >
                     Edit
-                  </button>
-                  <button className="text-white border bg-red-500 px-4 py-1 rounded-md">
+                  </Link>
+                  <button
+                    className="text-white border bg-red-500 px-4 py-1 rounded-md cursor-pointer"
+                    onClick={() => deleteUser(user.id)}
+                  >
                     Delete
                   </button>
                 </td>
