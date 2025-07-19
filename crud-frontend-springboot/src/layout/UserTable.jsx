@@ -44,11 +44,11 @@ export const UserTable = () => {
                 <td className="px-4 py-2 ">{user.name}</td>
                 <td className="px-4 py-2 ">{user.username}</td>
                 <td className="flex item-center">
-                  <button className="text-white border bg-blue-500 px-4 py-1 rounded-md mr-2">
+                  <Link to={`/view-user/${user.id}`} className="text-white border bg-blue-500 px-4 py-1 rounded-md mr-2">
                     View
-                  </button>
+                  </Link>
                   <Link
-                    to={`/edituser/${user.id}`}
+                    to={`/edit-user/${user.id}`}
                     className="border-blue-500 border text-blue-500 bg-white px-4 py-1 rounded-md mr-2"
                   >
                     Edit
